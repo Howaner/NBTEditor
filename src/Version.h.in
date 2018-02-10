@@ -1,0 +1,2 @@
+#pragma once
+const char* NBTEDITOR_VERSION = "@NBTEDITOR_VERSION@";

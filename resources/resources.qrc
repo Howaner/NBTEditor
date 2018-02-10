@@ -1,0 +1,33 @@
+<RCC>
+  <qresource prefix="general">
+    <file>logo.png</file>
+  </qresource>
+  <qresource prefix="languages">
+    <file>lang_de.qm</file>
+  </qresource>
+  <qresource prefix="icons">
+    <file>icon-edit.png</file>
+    <file>icon-delete.png</file>
+    <file>icon-add.png</file>
+    <file>icon-insertbelow.png</file>
+  </qresource>
+  <qresource prefix="treeview_icons">
+    <file>stylesheet-vline.png</file>
+    <file>stylesheet-branch-closed.png</file>
+    <file>stylesheet-branch-end.png</file>
+    <file>stylesheet-branch-more.png</file>
+    <file>stylesheet-branch-open.png</file>
+  </qresource>
+  <qresource prefix="nbt_icons">
+    <file>nbt-double.png</file>
+    <file>nbt-float.png</file>
+    <file>nbt-byte.png</file>
+	<file>nbt-array.png</file>
+	<file>nbt-compound.png</file>
+	<file>nbt-int.png</file>
+	<file>nbt-list.png</file>
+	<file>nbt-long.png</file>
+	<file>nbt-short.png</file>
+	<file>nbt-string.png</file>
+  </qresource>
+</RCC>
