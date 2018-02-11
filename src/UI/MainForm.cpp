@@ -17,7 +17,7 @@
 using namespace std;
 
 namespace UI {
-	MainForm::MainForm() : saveEnabled(false) {
+	MainForm::MainForm() : currentFileType(NBT::NbtGzipCompressed), saveEnabled(false) {
 		widget.setupUi(this);
 		setAcceptDrops(true);
 
@@ -55,7 +55,7 @@ namespace UI {
 
 	void MainForm::loadFile(QString file) {
 		try {
-			NBT::NBTCompound* compound = NBT::NBTReader::LoadFromFile(file.toStdString().c_str());
+			NBT::NBTCompound* compound = NBT::NBTReader::LoadFromFile(file.toStdString().c_str(), &currentFileType);
 			NBT::NBTEntry* rootEntry = new NBT::NBTEntry("", NBT::NbtCompound);
 			rootEntry->value = compound;
 
@@ -82,7 +82,15 @@ namespace UI {
 			NBT::NBTEntry* rootEntry = model->GetRootEntry();
 			NBT::NBTCompound* compound = NBT::NBTHelper::GetCompound(*rootEntry);
 
-			NBT::NBTReader::SaveToFile(file.toStdString().c_str(), compound);
+			switch (currentFileType) {
+				case NBT::NbtUncompressed:
+					NBT::NBTReader::SaveToFileUncompressed(file.toStdString().c_str(), compound);
+					break;
+				case NBT::NbtGzipCompressed:
+					NBT::NBTReader::SaveToFile(file.toStdString().c_str(), compound);
+					break;
+			}
+
 			currentFile = file;
 			disableSaving();
 		} catch (const Exception::Exception& ex) {
@@ -137,6 +145,7 @@ namespace UI {
 		widget.treeView->setModel(newModel);
 		widget.treeView->expandToDepth(1);
 
+		currentFileType = NBT::NbtGzipCompressed;
 		currentFile.clear();
 		if (oldModel != NULL)
 			delete oldModel;

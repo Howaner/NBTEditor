@@ -40,6 +40,7 @@ namespace UI {
 
 	void AddElementDialog::disableInputName() {
 		widget.nameField->setEnabled(false);
+		widget.buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
 	}
 
 	void AddElementDialog::InitTypeSelection() {

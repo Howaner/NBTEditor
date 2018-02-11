@@ -398,8 +398,11 @@ namespace NBT {
 			NBTType type = static_cast<NBTType>(buffer->ReadByte());
 			jint length = buffer->ReadInt();
 
-			if (type == NbtEnd && length != 0)
-				throw Exception::NBTException("Missing type in list", NULL);
+			if (type == NbtEnd) {
+				if (length != 0)
+					throw Exception::NBTException("Missing type in list", NULL);
+				return new NBTList(type);
+			}
 
 			const NBTTag* tag = NBTHelper::GetTagByType(type);
 			if (tag == NULL)
@@ -421,12 +424,14 @@ namespace NBT {
 			buffer->WriteByte(list.type);
 			buffer->WriteInt((jint) list.entries.size());
 
-			const NBTTag* tag = NBTHelper::GetTagByType(list.type);
-			if (tag == NULL)
-				throw Exception::NBTException("Unknown nbt element type: " + std::to_string(list.type), NULL);
+			if (list.type != NbtEnd) {
+				const NBTTag* tag = NBTHelper::GetTagByType(list.type);
+				if (tag == NULL)
+					throw Exception::NBTException("Unknown nbt element type: " + std::to_string(list.type), NULL);
 
-			for (auto& entry : list.entries) {
-				tag->Write(buffer, *entry);
+				for (auto& entry : list.entries) {
+					tag->Write(buffer, *entry);
+				}
 			}
 		}
 

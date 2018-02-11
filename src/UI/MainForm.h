@@ -3,6 +3,7 @@
 #include "TreeContextMenu.h"
 #include <QString>
 #include <QDropEvent>
+#include "NBT/NBTType.h"
 
 namespace UI {
 	class MainForm : public QMainWindow {
@@ -36,6 +37,7 @@ namespace UI {
 		TreeContextMenu* contextMenu;
 		
 		QString currentFile;
+		NBT::NBTFileType currentFileType;
 		bool saveEnabled;
 
 		void enableSaving();

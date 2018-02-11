@@ -15,4 +15,9 @@ namespace NBT {
 		NbtCompound = 10,
 		NbtIntArray = 11
 	};
+
+	enum NBTFileType {
+		NbtGzipCompressed = 0,
+		NbtUncompressed = 1
+	};
 }
