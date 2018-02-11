@@ -1,4 +1,4 @@
-# NBTEditor (1.0)
+# NBTEditor
 A nbt editor software to edit minecraft binary files. Currently it can be used to edit .dat and .schematic files.  
 ![NBTEditor](Image.png)
 
