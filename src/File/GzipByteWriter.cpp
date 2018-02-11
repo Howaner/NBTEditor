@@ -7,7 +7,7 @@
 
 namespace File {
 
-	GzipByteWriter::GzipByteWriter(ByteWriter* parentWriter) : bufferLength(0), bufferOffset(0), parentWriter(parentWriter) {
+	GzipByteWriter::GzipByteWriter(ByteWriter* parentWriter, bool gzip) : gzip(gzip), bufferLength(0), bufferOffset(0), parentWriter(parentWriter) {
 		memset(&stream, 0, sizeof stream);
 		stream.zalloc = (alloc_func)0;
 		stream.zfree = (free_func)0;
@@ -19,7 +19,8 @@ namespace File {
 		stream.avail_in = bufferOffset;
 		stream.next_in = buffer;
 
-		int result = deflateInit2(&stream, Z_DEFAULT_COMPRESSION, Z_DEFLATED, MAX_WBITS + 16, 8, Z_DEFAULT_STRATEGY);
+		int zlibFlags = (gzip ? (MAX_WBITS | 16) : MAX_WBITS);
+		int result = deflateInit2(&stream, Z_DEFAULT_COMPRESSION, Z_DEFLATED, zlibFlags, 8, Z_DEFAULT_STRATEGY);
 		if (result != 0)
 			throw Exception::GzipException("ZLIB deflate init failed: " + std::to_string(result));
 	}

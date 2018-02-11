@@ -14,6 +14,7 @@ namespace File {
 
 		void WriteSignedByte(jbyte val);
 		void WriteShort(jshort val);
+		void WriteThreeBytesInt(jint val);
 		void WriteInt(jint val);
 		void WriteLong(jlong val);
 		void WriteDouble(jdouble val);

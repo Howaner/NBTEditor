@@ -9,5 +9,10 @@ namespace NBT {
 
 		static void SaveToFile(const char* filePath, NBTCompound* compound);
 		static void SaveToFileUncompressed(const char* filePath, NBTCompound* compound);
+
+		static NBTCompound* LoadRegionFile(const char* filePath);
+		static NBTCompound* LoadRegionData(Byte* data, uint length);
+
+		static void SaveRegionToFile(const char* filePath, NBTCompound* compound);
 	};
 }

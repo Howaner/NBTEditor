@@ -27,6 +27,14 @@ namespace File {
 		return (((unsigned short) reader->ReadByte()) << 8) | reader->ReadByte();
 	}
 
+	jint ByteBuffer::ReadThreeBytesInt() {
+		Byte* bytes = ReadBytes(3);
+		jint number = ((bytes[0] & 0x0F) << 16) | ((bytes[1] & 0xFF) << 8) | ((bytes[2] & 0xFF));
+
+		delete[] bytes;
+		return number;
+	}
+
 	jint ByteBuffer::ReadInt() {
 		Byte* bytes = ReadBytes(4);
 		std::reverse(bytes, bytes + 4);  // Big-Endian to Little-Endian

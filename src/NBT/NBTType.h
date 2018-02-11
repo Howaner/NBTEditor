@@ -18,6 +18,7 @@ namespace NBT {
 
 	enum NBTFileType {
 		NbtGzipCompressed = 0,
-		NbtUncompressed = 1
+		NbtUncompressed = 1,
+		NbtAnvilRegion = 2
 	};
 }

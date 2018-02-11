@@ -5,7 +5,7 @@
 namespace File {
 	class GzipByteReader : public ByteReader {
 	public:
-		GzipByteReader(Byte* data, uint dataLength);
+		GzipByteReader(Byte* data, uint dataLength, bool gzip = true);
 		~GzipByteReader();
 		Byte ReadByte();
 		Byte* ReadBytes(uint length);
@@ -15,10 +15,9 @@ namespace File {
 		void FillNextBuffer();
 		Byte* GetBuffer() { return buffer; }
 
-	protected:
-//		void FillNextBuffer();
-
 	private:
+		bool gzip;
+
 		z_stream stream;
 		bool finishedRead;
 

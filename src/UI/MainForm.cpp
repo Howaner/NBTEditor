@@ -54,8 +54,16 @@ namespace UI {
 	}
 
 	void MainForm::loadFile(QString file) {
+		NBT::NBTFileType oldFileType = currentFileType;
 		try {
-			NBT::NBTCompound* compound = NBT::NBTReader::LoadFromFile(file.toStdString().c_str(), &currentFileType);
+			NBT::NBTCompound* compound;
+			if (file.endsWith(".mca")) {
+				compound = NBT::NBTReader::LoadRegionFile(file.toStdString().c_str());
+				currentFileType = NBT::NbtAnvilRegion;
+			} else {
+				compound = NBT::NBTReader::LoadFromFile(file.toStdString().c_str(), &currentFileType);
+			}
+
 			NBT::NBTEntry* rootEntry = new NBT::NBTEntry("", NBT::NbtCompound);
 			rootEntry->value = compound;
 
@@ -71,6 +79,7 @@ namespace UI {
 				delete oldModel;
 			disableSaving();
 		} catch (const Exception::Exception& ex) {
+			currentFileType = oldFileType;
 			QMessageBox::critical(this, tr("Can't load file"), tr("The NBT file could not be loaded:\n%1").arg(QString(ex.what())), QMessageBox::Ok, QMessageBox::Ok);
 			return;
 		}
@@ -88,6 +97,9 @@ namespace UI {
 					break;
 				case NBT::NbtGzipCompressed:
 					NBT::NBTReader::SaveToFile(file.toStdString().c_str(), compound);
+					break;
+				case NBT::NbtAnvilRegion:
+					NBT::NBTReader::SaveRegionToFile(file.toStdString().c_str(), compound);
 					break;
 			}
 

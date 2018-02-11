@@ -7,7 +7,7 @@
 #include <algorithm>
 
 namespace File {
-	GzipByteReader::GzipByteReader(Byte* data, uint dataLength) : finishedRead(false), bufferLength(0), offset(0), bufferOffset(0) {
+	GzipByteReader::GzipByteReader(Byte* data, uint dataLength, bool gzip) : gzip(gzip), finishedRead(false), bufferLength(0), offset(0), bufferOffset(0) {
 		memset(&stream, 0, sizeof stream);
 		stream.zalloc = (alloc_func)0;
 		stream.zfree = (free_func)0;
@@ -18,7 +18,8 @@ namespace File {
 
 		buffer = new Byte[GZIP_BUFFER_SIZE];
 
-		int result = inflateInit2(&stream, MAX_WBITS | 16);
+		int zlibFlags = (gzip ? (MAX_WBITS | 16) : MAX_WBITS);
+		int result = inflateInit2(&stream, zlibFlags);
 		if (result != 0)
 			throw Exception::GzipException("ZLIB init failed: " + std::to_string(result));
 		FillNextBuffer();

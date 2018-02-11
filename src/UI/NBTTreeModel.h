@@ -16,7 +16,7 @@ namespace UI {
 
 	public:
 		NBTTreeModel(NBT::NBTEntry* rootEntry);
-		~NBTTreeModel();
+		virtual ~NBTTreeModel();
 
 		QVariant data(const QModelIndex& index, int role) const override;
 		QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;

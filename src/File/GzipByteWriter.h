@@ -5,7 +5,7 @@
 namespace File {
 	class GzipByteWriter : public ByteWriter {
 	public:
-		GzipByteWriter(ByteWriter* parentWriter);
+		GzipByteWriter(ByteWriter* parentWriter, bool gzip = true);
 		~GzipByteWriter();
 
 		void WriteByte(const Byte byte);
@@ -19,6 +19,7 @@ namespace File {
 		void DoGzipCompression(int mode, int expectedResult);
 
 	private:
+		bool gzip;
 		z_stream stream;
 
 		Byte* buffer;

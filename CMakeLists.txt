@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.1.0)
 
-project(nbteditor VERSION 1.1)
-set (NBTEDITOR_VERSION 1.1)
+project(nbteditor VERSION 1.2)
+set (NBTEDITOR_VERSION 1.2)
 
 find_package(Qt5Widgets)
 

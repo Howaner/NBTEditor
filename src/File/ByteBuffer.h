@@ -15,6 +15,7 @@ namespace File {
 		jbyte ReadSignedByte();
 		jshort ReadShort();
 		unsigned short ReadUShort();
+		jint ReadThreeBytesInt(); // Used in minecraft level format
 		jint ReadInt();
 		jlong ReadLong();
 		jdouble ReadDouble();

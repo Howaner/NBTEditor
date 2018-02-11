@@ -8,6 +8,7 @@ static_assert(sizeof(double) == 8, "Assuming that a double is 8 byte long");
 typedef unsigned char Byte;
 typedef unsigned int uint;
 const unsigned int GZIP_BUFFER_SIZE = 128;
+const unsigned int WRITE_BUFFER_SIZE = 256;
 const unsigned int MIN_TAG = 1;
 const unsigned int MAX_TAG = 11;
 

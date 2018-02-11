@@ -2,7 +2,6 @@
 #include "NBTEntry.h"
 #include "Globals.h"
 #include <vector>
-#include <QModelIndex>
 
 namespace File {
 	class ByteBuffer;
@@ -14,7 +13,8 @@ namespace NBT {
 
 	class NBTCompound {
 	public:
-		NBTCompound() {}
+		NBTCompound();
+		NBTCompound(NBTCompound* oldCompound);  // Create a copy
 		~NBTCompound();
 
 		void Free();
@@ -29,7 +29,7 @@ namespace NBT {
 		bool RemoveEntry(NBTEntry* entry);
 
 	private:
+		bool noFree;
 		std::vector<NBTEntry*> entries;
-		static const NBTTag** tagsByType;
 	};
 }

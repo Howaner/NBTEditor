@@ -24,6 +24,12 @@ namespace File {
 		WriteByte(val & 0xFF);
 	}
 
+	void WriteBuffer::WriteThreeBytesInt(jint val) {
+		WriteByte((val >> 16) & 0x0F);
+		WriteByte((val >> 8) & 0xFF);
+		WriteByte(val & 0xFF);
+	}
+
 	void WriteBuffer::WriteInt(jint val) {
 		Byte bytes[4];
 		memcpy(bytes, &val, 4);

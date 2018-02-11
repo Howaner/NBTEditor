@@ -7,8 +7,18 @@
 
 namespace NBT {
 
+	NBTCompound::NBTCompound() : noFree(false) {
+	}
+
+	NBTCompound::NBTCompound(NBTCompound* oldCompound) : noFree(true) {
+		for (auto& entry : oldCompound->entries) {
+			entries.push_back(entry);
+		}
+	}
+
 	NBTCompound::~NBTCompound() {
-		Free();
+		if (!noFree)
+			Free();
 	}
 
 	void NBTCompound::Free() {

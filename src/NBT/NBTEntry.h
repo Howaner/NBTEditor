@@ -1,8 +1,8 @@
 #pragma once
 #include <vector>
 #include "NBTType.h"
-#include <QModelIndex>
 #include <QString>
+#include "Globals.h"
 
 namespace NBT {
 
@@ -40,5 +40,13 @@ namespace NBT {
 			entries.clear();
 			type = NbtEnd;
 		}
+	};
+
+	struct RegionChunkInformation {
+		int relX;
+		int relZ;
+		int offset;
+		int lastChange;
+		Byte roundedSize;
 	};
 }
