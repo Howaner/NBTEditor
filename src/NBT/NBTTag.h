@@ -197,7 +197,7 @@ namespace NBT {
 		NBTTagLong() : NBTTagBasic("nbt-long.png", "Long") {}
 
 		void* Read(ByteBuffer* buffer) const override {
-			long* data = new long;
+			jlong* data = new jlong;
 			*data = buffer->ReadLong();
 			return data;
 		}
@@ -219,7 +219,7 @@ namespace NBT {
 				return false;
 
 			bool success = false;
-			jlong number = value.toString().toLong(&success, 10);
+			jlong number = (sizeof(long) == 8) ? value.toString().toLong(&success, 10) : value.toString().toLongLong(&success, 10);
 			if (!success)
 				return false;
 
@@ -233,7 +233,7 @@ namespace NBT {
 		NBTTagFloat() : NBTTagBasic("nbt-float.png", "Float") {}
 
 		void* Read(ByteBuffer* buffer) const override {
-			float* data = new float;
+			jfloat* data = new jfloat;
 			*data = buffer->ReadFloat();
 			return data;
 		}
@@ -291,7 +291,7 @@ namespace NBT {
 				return false;
 
 			bool success = false;
-			double number = value.toString().toDouble(&success);
+			jdouble number = (jdouble) value.toString().toDouble(&success);
 			if (!success)
 				return false;
 

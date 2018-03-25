@@ -56,18 +56,34 @@ namespace File {
 	}
 
 	jdouble ByteBuffer::ReadDouble() {
-		jlong doubleAsLong = ReadLong();
-		jdouble number = 0;
+		Byte* bytes = ReadBytes(8);
+		uint64_t longNumber =
+			uint64_t(bytes[7])
+			| (uint64_t(bytes[6]) << 8)
+			| (uint64_t(bytes[5]) << 16)
+			| (uint64_t(bytes[4]) << 24)
+			| (uint64_t(bytes[3]) << 32)
+			| (uint64_t(bytes[2]) << 40)
+			| (uint64_t(bytes[1]) << 48)
+			| (uint64_t(bytes[0]) << 56);
+		delete[] bytes;
 
-		memcpy(&number, &doubleAsLong, 8);
+		jdouble number = 0;
+		memcpy(&number, &longNumber, 8);
 		return number;
 	}
 
 	jfloat ByteBuffer::ReadFloat() {
-		jint floatAsInt = ReadInt();
-		jfloat number = 0;
+		Byte* bytes = ReadBytes(4);
+		uint32_t intNumber =
+			uint32_t(bytes[3])
+			| (uint32_t(bytes[2]) << 8)
+			| (uint32_t(bytes[1]) << 16)
+			| (uint32_t(bytes[0]) << 24);
+		delete[] bytes;
 
-		memcpy(&number, &floatAsInt, 4);
+		jfloat number = 0;
+		memcpy(&number, &intNumber, 4);
 		return number;
 	}
 

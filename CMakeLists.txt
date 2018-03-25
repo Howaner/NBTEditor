@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.1.0)
 
-project(nbteditor VERSION 1.2)
-set (NBTEDITOR_VERSION 1.2)
+project(nbteditor VERSION 1.3)
+set (NBTEDITOR_VERSION 1.3)
 
 find_package(Qt5Widgets)
 
@@ -22,9 +22,10 @@ configure_file("${CMAKE_CURRENT_SOURCE_DIR}/src/Version.h.in" "${CMAKE_CURRENT_B
 
 set(nbteditor_res "${CMAKE_CURRENT_SOURCE_DIR}/resources/resources.qrc")
 # For Windows release build: set(nbteditor_res "${CMAKE_CURRENT_SOURCE_DIR}/resources/resources.qrc" "${CMAKE_CURRENT_SOURCE_DIR}/resources/nbteditor.rc" "${CMAKE_CURRENT_SOURCE_DIR}/resources/qt_de.qm")
-file(GLOB_RECURSE nbteditor_src "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/UI/*.ui")
+file(GLOB_RECURSE nbteditor_src "${CMAKE_CURRENT_BINARY_DIR}/src/Version.h" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/UI/*.ui")
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/src")
+include_directories("${CMAKE_CURRENT_BINARY_DIR}/src")
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/window")
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/resources")
 include_directories( ${CMAKE_BINARY_DIR} )

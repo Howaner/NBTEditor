@@ -77,7 +77,7 @@ namespace NBT {
 		return GetTag<NBTTagIntArray>(NbtIntArray)->GetData(entry);
 	}
 
-	void NBTHelper::SetDouble(NBTEntry& entry, double value) {
+	void NBTHelper::SetDouble(NBTEntry& entry, jdouble value) {
 		GetTag<NBTTagDouble>(NbtDouble)->SetData(entry, value);
 	}
 

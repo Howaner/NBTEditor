@@ -24,7 +24,7 @@ namespace NBT {
 		static NBTList& GetList(NBTEntry& entry);
 		static NBTCompound* GetCompound(NBTEntry& entry);
 
-		static void SetDouble(NBTEntry& entry, double value);
+		static void SetDouble(NBTEntry& entry, jdouble value);
 		static void SetString(NBTEntry& entry, QString value);
 
 	private:
