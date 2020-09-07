@@ -14,7 +14,7 @@ The software is written in C++ with the Qt5 framework and Zlib.
 ## How to compile it on linux
 ```
 apt-get install build-essential qt5-default qttools5-dev-tools cmake zlib1g-dev
-mkdir build
+mkdir build && cd build
 cmake ..
 make
 ./nbteditor
