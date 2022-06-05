@@ -18,6 +18,7 @@ namespace NBT {
 		tags[NbtList] = new NBTTagList();
 		tags[NbtCompound] = new NBTTagCompound();
 		tags[NbtIntArray] = new NBTTagIntArray();
+		tags[NbtLongArray] = new NBTTagLongArray();
 		return tags;
 	}();
 

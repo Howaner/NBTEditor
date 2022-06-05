@@ -390,6 +390,51 @@ namespace NBT {
 		}
 	};
 
+	class NBTTagLongArray : public NBTTagBasic<NBTArray<jlong>> {
+	public:
+		NBTTagLongArray() : NBTTagBasic("nbt-array.png", "Long Array") {}
+
+		void* Read(ByteBuffer* buffer) const override {
+			jint length = buffer->ReadInt();
+			// TODO: Overflow check
+
+			long* array = new long[length];
+			for (jint i = 0; i < length; i++) {
+				array[i] = buffer->ReadLong();
+			}
+
+			return new NBTArray<jlong>(length, array);
+		}
+
+		void Write(WriteBuffer* buffer, NBTEntry& entry) const override {
+			NBTArray<jlong>& data = GetData(entry);
+			buffer->WriteInt(data.length);
+
+			for (uint i = 0; i < data.length; i++) {
+				buffer->WriteLong(data.array[i]);
+			}
+		}
+
+		void* CreateDefaultData() const override {
+			return new NBTArray<jlong>(0, new jlong[0]);
+		}
+
+		void SetData(NBTEntry& entry, NBTArray<jlong>& data) const override {
+			if (entry.value != NULL)
+				delete static_cast<NBTArray<jlong>*>(entry.value);
+			entry.value = &data;
+		}
+
+		QVariant GetQtData(NBTEntry& entry) const override {
+			return QString::number(GetData(entry).length) + QString(" longs");
+		}
+
+		bool SetQtData(NBTEntry&, const QVariant&) const override {
+			// Not possible
+			return false;
+		}
+	};
+
 	class NBTTagList : public NBTTagBasic<NBTList> {
 	public:
 		NBTTagList() : NBTTagBasic("nbt-list.png", "List") {}
