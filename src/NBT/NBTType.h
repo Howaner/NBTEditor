@@ -13,7 +13,8 @@ namespace NBT {
 		NbtString = 8,
 		NbtList = 9,
 		NbtCompound = 10,
-		NbtIntArray = 11
+		NbtIntArray = 11,
+		NbtLongArray = 12
 	};
 
 	enum NBTFileType {

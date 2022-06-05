@@ -10,7 +10,7 @@ typedef unsigned int uint;
 const unsigned int GZIP_BUFFER_SIZE = 128;
 const unsigned int WRITE_BUFFER_SIZE = 256;
 const unsigned int MIN_TAG = 1;
-const unsigned int MAX_TAG = 11;
+const unsigned int MAX_TAG = 12;
 
 typedef signed char jbyte;
 typedef int16_t jshort;
